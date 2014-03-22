@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Arduino-Android Bluetooth Connection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Loading Flat UI -->
+    <link href="css/lucas.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/AA_logo.png">
+  </head>
+
+  <body class="android">
+    <!-- Barra Superior --> 
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <!-- cabeçalho -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+         <span class="sr-only">Toggle navigation</span>
+        </button>
+        <a class="navbar-brand" href="index.html">AA Bridge</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse-01">
+        <!--Home-->
+        <ul class="nav navbar-nav">           
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#fakelink">Downloads</a></li>
+          <li><a href="#fakelink">About</a></li>
+        </ul>    
+
+    </div>
+    </nav>
+    <div class="whiteText">
+      <div align="center">
+          <img src="images/logo_android.png" width="10%"/>
+          <h2>Iniciando com o Android-Arduino Bridge</h2>
+      
+      </div>
+    </div>
+    
+    <div class="jumbotron_android">
+    <h3>1.Ambiente de desenvolvimento</h3>
+    <p> Para o desenvolvimento do aplicativo será necessário o uso de uma IDE Java, configurada para desenvolvimento Android. Recomendamos o uso do <a class="interText" href="http://developer.android.com/sdk/index.html"> <b>ADT Bundle</b></a>, esta é uma versão do Eclipse já configurada para o desenvolvimento android. </p>
+    
+    <h3>2.Criando um novo projeto</h3>
+    <p> Se você já possui algum projeto e queira apenas adicionar a API, pule para o passo 3.<br>
+     Com o Eclipse aberto, crie um novo projeto para android: File > New > Android Application Project
+    <br> a seguinte janela deve aperecer, configure seu projeto como preferir.</p>
+    <img src="images/tutorial_android/image1.png" width="500px"/>
+
+    <h3>3.Adicionando a API ao seu projeto</h3>
+    <p> Faça o <a class="interText" href="http://developer.android.com/sdk/index.html"><b>download do Arduino Android Bridge</b></a>, dê preferência às versões mais recentes.<br>
+    Extraia o arquivo "Android_Arduino_Bridge.zip" e copie o arquivo "Arduino_Android_Bridge.jar" contido nesse.<br>
+    Voltando ao Eclipse, cole o .jar na pasta /libs do seu projeto, como na imagem abaixo:</p>
+    <img src="images/tutorial_android/image2.png"/> 
+
+    <h3>4.Adicionando permissões ao AndroidManifest</h3>
+    <p> O <a class="interText" href="http://developer.android.com/guide/topics/manifest/manifest-intro.html"><b>AndroidManifest.xml</b></a> é um arquivo presente na raiz do seu projeto, nele constam as informações essenciais sobre o seu aplicativo, que serão lidas pelo sistema Android.</p>
+    <p>Para que possamos acessar o adaptador Bluetooth do aparelho é necessário que o aplicativo tenha permissão para isso. Para adicionar essa permissão, basta copiar o trecho abaixo para o AndroidManifest.xml do seu aplicativo:
+    </p>  
+    <p>&lt;uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/&gt;<br>
+    &lt;uses-permission android:name="android.permission.BLUETOOTH"/&gt;</p>
+    <p> Você pode editar o .xml diretamente, como mostrado abaixo:</p>
+    <img src="images/tutorial_android/image3.png"/>
+    
+    <h3>5.Importando a API em uma Activity</h3>
+    <p> Insira, no início da sua activity (ou qualquer outro .java que for utilizar a API), o seguinte trecho:</p>
+    <p>import com.teamlab.arduinoandroidapi.Arduino_Bluetooth;</p>
+
+    <img src="images/tutorial_android/image4.png"/>
+
+    <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+  </div>
+  
+    <!-- Load JS here for greater good =============================-->
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+    
+    <br>
+  </body>
+
+  <footer>
+    <div>
+    <p>
+     Developer: Lucas Cassiano - <a href="http://www.natalnet.br"> <a href="http://www.natalnet.br"> <img src="images/natalnet_logo.png" width="100" /></a> - TEAM lab - UFRN - 2014</p>
+    </div>
+  </footer>
+</html>
