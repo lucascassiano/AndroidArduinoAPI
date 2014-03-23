@@ -27,7 +27,8 @@
         <!--Home-->
         <ul class="nav navbar-nav">           
           <li><a href="index.html">Home</a></li>
-          <li><a href="#fakelink">Downloads</a></li>
+          <li><a href="downloads.html">Downloads</a></li>
+          <li><a href="references.html">References</a></li>
           <li><a href="#fakelink">About</a></li>
         </ul>    
 
@@ -37,11 +38,14 @@
       <div align="center">
           <img src="images/logo_android.png" width="10%"/>
           <h2>Iniciando com o Android-Arduino Bridge</h2>
-      
+          <font size="12px">
+          <p>Desenvolva aplicações Android que se conectam à dispositivos baseados em Arduino </p>
+          </font>
       </div>
     </div>
     
     <div class="jumbotron_android">
+
     <h3>1.Ambiente de desenvolvimento</h3>
     <p> Para o desenvolvimento do aplicativo será necessário o uso de uma IDE Java, configurada para desenvolvimento Android. Recomendamos o uso do <a class="interText" href="http://developer.android.com/sdk/index.html"> <b>ADT Bundle</b></a>, esta é uma versão do Eclipse já configurada para o desenvolvimento android. </p>
     
@@ -61,18 +65,63 @@
     <p> O <a class="interText" href="http://developer.android.com/guide/topics/manifest/manifest-intro.html"><b>AndroidManifest.xml</b></a> é um arquivo presente na raiz do seu projeto, nele constam as informações essenciais sobre o seu aplicativo, que serão lidas pelo sistema Android.</p>
     <p>Para que possamos acessar o adaptador Bluetooth do aparelho é necessário que o aplicativo tenha permissão para isso. Para adicionar essa permissão, basta copiar o trecho abaixo para o AndroidManifest.xml do seu aplicativo:
     </p>  
-    <p>&lt;uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/&gt;<br>
-    &lt;uses-permission android:name="android.permission.BLUETOOTH"/&gt;</p>
+    <p class="code">&lt;uses-permission android:name=<font color=#0000ff>"android.permission.BLUETOOTH_ADMIN"</font>/&gt;<br>
+    &lt;uses-permission android:name=<font color=#0000ff>"android.permission.BLUETOOTH"</font>/&gt;</p>
     <p> Você pode editar o .xml diretamente, como mostrado abaixo:</p>
     <img src="images/tutorial_android/image3.png"/>
     
     <h3>5.Importando a API em uma Activity</h3>
     <p> Insira, no início da sua activity (ou qualquer outro .java que for utilizar a API), o seguinte trecho:</p>
     <p>import com.teamlab.arduinoandroidapi.Arduino_Bluetooth;</p>
-
     <img src="images/tutorial_android/image4.png"/>
 
-    <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+    <h3>6.Iniciando Arduino_Bluetooth</h3>
+    <p>Inicialmente crie uma variável global do tipo Arduino_Bluetooth</p>
+    <p class="code"><font color=#0000ff>Arduino_Bluetooth</font> arduino;</p>
+    
+    <p>No método onCreate() da sua Activity inicie sua variável, esse passo é importante para verificar se o aparelho android possui adaptador bluetooth:</p>
+    <p class="code">arduino = <font color=#0055ff>new</font> <font color=#000000>ArduinoBluetooth()</font>;</p>
+
+    <h3>7.Iniciando Conexão</h3>
+    <p>A API ainda não possui métodos internos de pareamento com dispositivos, portanto é necessário que o usuário efetue o pareamento manualmente.
+    <br>No momento que desejar iniciar uma conexão, seja quando o usuário pressionar um botão ou ao início de uma atividade, basta apenas a seguinte linha:</p>
+    <p class="code">arduino.Begin(<font color=#0000ff>"nome do módulo Bluetooth"</font>);</p>
+    <p>Por exemplo, utilizando o módulo JY-MCU, que possui nome padrão "linvor", a conexão iniciaria desta forma:</p>
+    <p class="code">arduino.Begin(<font color=#0000ff>"linvor"</font>);</p>
+    <p>Se o nome do dispositivo não for constante, a API disponibiliza métodos de listagem de dispositivos pareados, de forma que o usuário possa escolher com qual dispositivo deseja se conectar.</p>
+
+    <h3>8.Comunicação com arduino</h3>
+    <p>Tentamos manter os métodos de recebimento e envios de dados próximos ao de uma comucação serial, realizada pelo arduino. Dessa forma, para ler os dados recebidos e enviar os dados basta seguir os comandos a baixo:</p>
+    <p>Recebimento:</p>
+    
+    <p class="code"><font color=#ff3322>String</font> leitura = arduino.Read();</p>
+
+    <p>Ou, se deseja-se leitura contínuas, (utilizando Threads ou Runnables) em que a leitura deve atualizada apenas quando novos dados forem recebidos:</p>
+    <p class="code"><font color=#0022ff>if</font>(arduino.Available()>0){<br>
+     &nbsp; leitura= arduino.Read();<br>
+    }</p>
+    
+    <p>Envio:</p>
+    <p class="code">arduino.Write(<font color=#0000ff>"Hello World"</font>);</p>
+
+    <h3>9.Estados da conexão</h3>
+    <p>Com o conteúdo até o item 8 já é possível desenvolver aplicações para conexão com arduino, porém é extremamente recomendável que, sempre que possível, teste a conexão com o dispositivo. <br> Na versão atual da API (0.2) existem os seguintes estados de conexão:</p>
+    <p>
+    <code class="androidCode">ConnectionState.<font color=#0000ff>IMPOSSIBLE_CONNECTION</font></code>-> Quando o aparelho não possui adaptador bluetooth;<br>
+    <code class="androidCode">ConnectionState.<font color=#0000ff>WAITING_DEVICE</font></code>-> O aparalho possui bluetooth e o objeto Arduino_Bluetooth já foi construído;<br>
+    <code class="androidCode">ConnectionState.<font color=#0000ff>WAITING_DATA</font></code>->Uma conexão já foi estabelecida, porém ainda não recebeu-se dados;<br>
+    <code class="androidCode">ConnectionState.<font color=#0000ff>RECEIVING_DATA</font></code>->Está havendo troca de dados, neste momento é seguro realizar a leitura/envio de dados;<br>
+    <code class="androidCode">ConnectionState.<font color=#0000ff>ABORTED</font></code>-> Se ocorrer algum erro interno da API ou de conexão.<br>
+    </p>
+
+    <h3>10.Encerrando a conexão</h3>
+    <p>Ao fim da sua activity é necessário o encerramento do socket bluetooth, ou seja, no método onDestroy() da sua activity insira:</p>
+    <p class="code">arduino.CloseConnetion();</p>
+    <p>Para mais informações sobre o funcionamento da API acesse:
+     <a href="references.html"> <button class="btn btn-embossed btn-info">References</button></a></p>
+    <p>Download do projeto (eclipse):
+    <button class="btn btn-embossed btn-primary">Sample.zip</button> (em breve)</p>
+    
   </div>
   
     <!-- Load JS here for greater good =============================-->

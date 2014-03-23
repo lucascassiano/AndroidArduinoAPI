@@ -4466,7 +4466,7 @@ body.vjs-full-window {
 footer {
   position:fixed;
   background-color: #ffffff;
-  color: #bac1c8;
+  color: #998888;
   font-size: 10px;
   padding: 0;
   text-align: center;
@@ -4791,6 +4791,111 @@ font-family: "Lato", Helvetica, Arial, sans-serif;
   margin-bottom: 15px;
   font-size: 14px;
   font-weight: 200;
+}
+
+
+.jumbotron_arduino {
+  padding: 30px;
+  margin-bottom: 30px;
+  color: #000000;
+  background-color: #e9e9ff;
+  border-radius: 10px;
+}
+.jumbotron_arduino h1,
+.jumbotron_arduino .h1 {
+  color: inherit;
+}
+
+.jumbotron_arduino h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 200;
+}
+
+.jumbotron_arduino p {
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: 200;
+}
+
+.jumbotron_arduino a{
+  color:#000000;
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: 200;
+}
+
+
+.jumbotron_references {
+  padding: 30px;
+  margin-bottom: 30px;
+  color: #000000;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top: 0px;
+}
+.jumbotron_references h1,
+.jumbotron_references .h1 {
+  color: inherit;
+}
+
+.jumbotron_references h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 200;
+}
+
+.jumbotron_references p {
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: 200;
+}
+
+.jumbotron_references a{
+  color:#000000;
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: 200;
+}
+
+p.code{
+  color: #000000;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border-width: 1px;
+  border-color: #000000;
+  font-size: 13px;
+  font-style: normal;
+  font-variant: normal;
+  font: serif;
+  font-family: monospace;
+  padding-left: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  outline-width: 2px;
+  outline-color: #000000;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.15);
+}
+
+code.androidCode{
+  color: #000000;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border-width: 1px;
+  border-color: #000000;
+  font-size: 13px;
+  font-style: normal;
+  font-variant: normal;
+  font: serif;
+  font-family: monospace;
+  padding-left: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  outline-width: 2px;
+  outline-color: #000000;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.15);
 }
 
 

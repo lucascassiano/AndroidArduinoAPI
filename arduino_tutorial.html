@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Arduino-Android Bluetooth Connection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Loading Flat UI -->
+    <link href="css/lucas.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/AA_logo.png">
+  </head>
+
+  <body class="android" style="background-color:#00979c;">
+    <!-- Barra Superior --> 
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <!-- cabeçalho -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+         <span class="sr-only">Toggle navigation</span>
+        </button>
+        <a class="navbar-brand" href="index.html">AA Bridge</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse-01">
+        <!--Home-->
+        <ul class="nav navbar-nav">           
+          <li><a href="index.html">Home</a></li>
+          <li><a href="downloads.html">Downloads</a></li>
+          <li><a href="references.html">References</a></li>
+          <li><a href="#fakelink">About</a></li>
+        </ul>    
+
+    </div>
+    </nav>
+    <div class="whiteText">
+      <div align="center">
+          <img src="images/logo_arduino.png" width="10%"/>
+          <h2>Configurando o Arduino e módulo bluetooth</h2>
+          <font size="12px">
+          <p>Desenvolva aplicações Android que se conectam à dispositivos baseados em Arduino </p>
+          </font>
+      </div>
+    </div>
+    
+    <div class="jumbotron_arduino">
+        <h3>Módulo Bluetooth JY-MCU ("linvor")</h3>
+
+        <img src="images/tutorial_arduino/modulo_bluetooth.jpg" width="35%"/>
+        <h3>2.Ligando o módulo bluetooth ao Arduino</h3>
+        <p>A conexão dos pinos RX,TX, Vcc e GND devem seguir o esquema:</p>
+        <img src="images/tutorial_arduino/connection.jpg"/>
+        <p>Após esta etapa já é possível enviar e receber dados de um dispositivo android.</p>
+        <p>A transferência de dados deve ser tratada como uma comunicação <a href="http://arduino.cc/en/reference/serial"><b>Serial</b></a>, exemplo:</p>
+        <p class="code">
+        <font color=#ff3322>void <b>setup</b></font>(){<br> 
+             &nbsp;<font color=#ff3322>Serial</font>.begin(9600);<br>
+             &nbsp;<font color=#ff3322>Serial</font>.write("Hello Android");<br>
+        }<br>
+        <br>
+        <font color=#ff3322>void <b>loop</b></font>(){<br> 
+             &nbsp;<font color=#0022ff>if</font>(<font color=#ff3322>Serial</font>.available()>0){<br>
+             &nbsp;&nbsp;<font color=#ff3322>char</font> c = <font color=#ff3322>Serial</font>.read();<br>
+             &nbsp;}<br>
+        }<br>
+
+        </p>
+        <h3>3.Configurando o módulo bluetooth</h3>
+        <p>Com os fios conectados corretamente há a possibilidade de altera as configurações do módulo bluetooth. O componente que configuramos foi um JY-MCU, portanto não é garantido que a tabela abaixo funcione para outros modelos.</p>
+
+        <!--Tabela de configuração do módulo bluetooth-->
+        <div class="panel panel-default" width="500px">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Configurando Módulo Bluetooth - JY-MCU (linvor)</div>
+        <table class="table">
+        <tr style="font-size: 10pt; line-height: 13pt;"><th class="confluenceTh" style="background-color: #f0f0f0; border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        Command</div>
+        </th><th class="confluenceTh" style="background-color: #f0f0f0; border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        Description</div>
+        </th><th class="confluenceTh" style="background-color: #f0f0f0; border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        Options</div>
+        </th><th class="confluenceTh" style="background-color: #f0f0f0; border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        Response</div>
+        </th></tr>
+        <tr style="font-size: 10pt; line-height: 13pt;"><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        AT+VERSION</div>
+        </td><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        Returns the software version of the module</div>
+        </td><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        <br /></div>
+        </td><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        OKlinvorV1.x</div>
+        </td></tr>
+        <tr style="font-size: 10pt; line-height: 13pt;"><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        AT+BAUDx</div>
+        </td><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        Sets the baud rate of the module&nbsp;<br class="atl-forced-newline" />The command AT+BAUD8 sets the&nbsp;<br class="atl-forced-newline" />baud rate to 115200</div>
+        </td><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        1 &gt;&gt; 1200&nbsp;<br class="atl-forced-newline" />2 &gt;&gt; 2400&nbsp;<br class="atl-forced-newline" />3 &gt;&gt; 4800&nbsp;<br class="atl-forced-newline" />4 &gt;&gt; 9600 (Default)&nbsp;<br class="atl-forced-newline" />5 &gt;&gt; 19200&nbsp;<br class="atl-forced-newline" />6 &gt;&gt; 38400&nbsp;<br class="atl-forced-newline" />7 &gt;&gt; 57600&nbsp;<br class="atl-forced-newline" />8 &gt;&gt; 115200&nbsp;<br class="atl-forced-newline" />9 &gt;&gt; 230400</div>
+        </td><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        OK115200</div>
+        </td></tr>
+        <tr style="font-size: 10pt; line-height: 13pt;"><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        AT+NAMEOpenPilot</div>
+        </td><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        Sets the name of the module</div>
+        </td><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        Any name can be specified up to 20 characters</div>
+        </td><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        OKsetname</div>
+        </td></tr>
+        <tr style="font-size: 10pt; line-height: 13pt;"><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        AT+PINxxxx</div>
+        </td><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        Sets the pairing password of the device</div>
+        </td><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        Any 4 digit number can be used, the default&nbsp;<br class="atl-forced-newline" />pincode is 1234</div>
+        </td><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        OKsetPIN</div>
+        </td></tr>
+        <tr style="font-size: 10pt; line-height: 13pt;"><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        AT+PN</div>
+        </td><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        Sets the parity of the module</div>
+        </td><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        AT+PN &gt;&gt; No parity check</div>
+        </td><td class="confluenceTd" style="border: 1px solid rgb(221, 221, 221); font-size: 10pt; line-height: 13pt; margin: 0px; min-width: 0.6em; padding: 5px 7px; vertical-align: top;"><div style="font-size: 10pt; line-height: 13pt; padding: 0px;">
+        OK None</div>
+        </td></tr>
+        </table>
+       
+        </div>
+        <p><a href="http://wiki.openpilot.org/display/Doc/Serial+Bluetooth+Telemetry">source</a></p>
+        <h3>4.Conexão simultanea via USB e Bluetooth</h3>
+        <p>Um bom método de testar se a conexão está funcionando perfeitamente é conectar o arduino tanto a um aparelho android (via bluetooth), quanto via USB a um computador.</p>
+        <p>Utilizando a biblioteca <a href="http://arduino.cc/en/Reference/SoftwareSerial"><b>SoftwareSerial</b></a> é possível simular uma porta serial utilizando dois pinos digitais pwm. <br>
+        O <a href="http://arduino.cc/en/Tutorial/SoftwareSerialExample"><b>exemplo básico do uso de SoftwareSerial</b></a> pode ser usado para tal finalidade, conectando o pino TX do módulo bt ao pino 10 do arduino, e o pino RX do módulo ao 11 do microcontrolador. Desta forma todos os dados que o arduino receber via bluetooth serão ecoados no serialmonitor.
+
+        
+     </div>
+  
+    <!-- Load JS here for greater good =============================-->
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+    
+    <br>
+  </body>
+
+  <footer>
+    <div>
+    <p>
+     Developer: Lucas Cassiano - <a href="http://www.natalnet.br"> <a href="http://www.natalnet.br"> <img src="images/natalnet_logo.png" width="100" /></a> - TEAM lab - UFRN - 2014</p>
+    </div>
+  </footer>
+</html>

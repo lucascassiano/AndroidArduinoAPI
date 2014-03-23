@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Arduino-Android Bluetooth Connection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Loading Flat UI -->
+    <link href="css/lucas.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/AA_logo.png">
+
+        <script type="text/javascript"> 
+        //alert('Hey');
+            var conteudo_classes="lucas";
+            var conteudo_metodos="lucas";
+            var conteudo_enums="lucas";
+            //.onLoad=function(){ conteudo_classes=document.getElementById("conteudo_classes").innerText; alert('Hey');};
+            window.onload = function ()
+            {
+                conteudo_classes=document.getElementById("conteudo_classes").innerHTML;
+                conteudo_metodos=document.getElementById('conteudo_metodos').innerHTML;
+                conteudo_enums=document.getElementById("conteudo_enums").innerHTML;
+                mostrarClasses();
+            };
+                document.getElementById("conteudo_metodos").innerHTML=null;
+                document.getElementById("conteudo_enums").innerHTML=null;
+
+
+             //document.getElementById('conteudo_metodos').style.visibility = 'hidden'; 
+             //document.getElementById('conteudo_enums').style.visibility = 'hidden'; 
+
+            
+
+        function mostrarClasses()
+        {
+             
+             document.getElementById('conteudo_classes').innerHTML=conteudo_classes;
+             document.getElementById('conteudo_metodos').innerHTML=null;
+             document.getElementById("conteudo_enums").innerHTML=null;
+                
+             document.getElementById('btn_classes').className="active";
+             document.getElementById('btn_metodos').className="null";
+             document.getElementById('btn_enums').className="null";
+        }
+
+        function mostrarMetodos()
+        {
+             document.getElementById('conteudo_classes').innerHTML=null;
+             document.getElementById('conteudo_metodos').innerHTML=conteudo_metodos;
+             document.getElementById("conteudo_enums").innerHTML=null;
+                
+             //document.getElementById('conteudo_enums').style.visibility = 'hidden'; 
+             document.getElementById('btn_classes').className="null";
+             document.getElementById('btn_metodos').className="active";
+             document.getElementById('btn_enums').className="null";
+
+        }
+
+        function mostrarEnums()
+        {
+             
+
+            document.getElementById('conteudo_classes').innerHTML=null;
+            document.getElementById('conteudo_metodos').innerHTML=null;
+            document.getElementById("conteudo_enums").innerHTML=conteudo_enums;
+             
+            document.getElementById('btn_classes').className="null";
+            document.getElementById('btn_metodos').className="null";
+            document.getElementById("btn_enums").className="active";
+        }
+
+        </script>
+  </head>
+
+  <body class="android" style="background-color:#3d0b4d;">
+    <!--Controle de Páginas-->
+
+
+    <!-- Barra Superior --> 
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <!-- cabeçalho -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+         <span class="sr-only">Toggle navigation</span>
+        </button>
+        <a class="navbar-brand" href="index.html">AA Bridge</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse-01">
+        <!--Home-->
+        <ul class="nav navbar-nav">           
+          <li><a href="index.html">Home</a></li>
+          <li><a href="downloads.html">Downloads</a></li>
+          <li class="active"><a href="references.html">References</a></li>
+          <li><a href="#fakelink">About</a></li>
+        </ul>    
+    </div>
+    </nav>
+    <div class="whiteText">
+      <div align="center">
+          <h2> Reference: Android-Arduino Bridge</h2>
+          <font size="12px">
+          <p>Desenvolva aplicações Android que se conectam à dispositivos baseados em Arduino </p>
+          </font>
+      </div>
+    </div>
+<ul class="nav nav-tabs">
+  <li class="active" id="btn_classes"><a href="#" onclick="mostrarClasses()">Public Classes</a></li>
+  <li class="null" id="btn_metodos"  ><a href="#" onclick="mostrarMetodos()">Public Methods</a></li>
+  <li id="btn_enums" ><a href="#" onClick="mostrarEnums()">Public Enums</a></li>
+</ul>
+
+    <div class="jumbotron_references">
+    <!--Classes-->
+    <div id="conteudo_classes">
+      <h3>Arduino_Bluetooth</h3>
+      <p>Principal classe da API, esta administra a conexão com o Arduino, envio/recebimento de dados e encerramento de sockets.</p>
+      <p>Exemplo de uso:</p>
+      <p class="code">
+        <font color=#0000ff>Arduino_Bluetooth</font> arduino;<br><br>
+        <font color=#005500>//onCreate()</font><br>
+        arduino = <font color=#0055ff>new</font> <font color=#000000>ArduinoBluetooth()</font>;<br>  <br>
+        <font color=#005500>//Quando clicar em um botão</font><br>
+        arduino.Begin(<font color=#0000ff>"nome do módulo Bluetooth"</font>);<br><br>
+        <font color=#005500>//Em uma thread dedicada à leitura de dados</font><br>
+        <font color=#0022ff>if</font>(arduino.Available()>0){<br>
+        &nbsp; leitura= arduino.Read();<br>
+        }<br><br>
+        <font color=#005500>//Quando clicar em um botão para enviar dados</font><br>
+        arduino.Write(<font color=#0000ff>"Hello World"</font>);<br><br>
+
+        <font color=#005500>//onDestroy()</font><br>
+        arduino.CloseConnetion();
+      </p>
+
+    </div>
+
+    <!--METODOS-->
+    <div id="conteudo_metodos">
+     <div class="panel panel-default" >
+      <!-- Default panel contents -->
+      <div class="panel-heading">Métodos Públicos</div>
+      <!-- Table -->
+      <table class="table" style="font-size:14px;">
+        <tr>
+          <th>Tipo</th>
+          <th>Nome</th> 
+          <th>Funcionalidade</th>
+        </tr>
+        <tr>
+          <td>DeviceState</td>
+          <td>getDeviceState()</td> 
+          <td>Retorna o estado atual do dispositivo Arduino.</td>
+        </tr>
+        <tr>
+          <td>boolean</td>
+          <td>isDeviceConnected()</td> 
+          <td>Retorna verdadeiro se há um dispositivo conectado.</td>
+        </tr>
+        <tr>
+          <td>String</td>
+          <td>getDeviceAddress()</td> 
+          <td>Retorna endereço do dispositivo remoto.</td>
+        </tr>
+        <tr>
+          <td>int</td>
+          <td>Available()</td> 
+          <td>Retorna -1 se o socket bluetooth não está conectado ou é nulo. <br> Retorna 0 se o socket bluetooth está conectado mas não está recebendo dados. <br> retorna 1 se o está conectado e recebendo dados.</td>
+        </tr>
+        <tr>
+          <td>ConnectionState</td>
+          <td>connection_state</td> 
+          <td>Retorna o estado atual da conexão.</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>Begin(<font color=#0000ff>String</font> nome)</td> 
+          <td>Inicia uma conexão via bluetooth com um dispositivo.</td>
+        </tr>
+        <tr>
+          <td>String</td>
+          <td>Read()</td> 
+          <td>Retorna a ultima string recebida.</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>CheckBluetoothAdapter()</td> 
+          <td>Define o estado do adaptador bluetooth, ou seja, se ele existe e está ativado.</td>
+        </tr>
+        <tr>
+          <td>boolean</td>
+          <td>CanConnectWith(<font color=#0000ff>String</font> deviceName)</td> 
+          <td>Retorna true se o existir algum dispositivo pareado com o nome "deviceName", caso contrário retorna false.</td>
+        </tr>
+        <tr>
+          <td>String</td>
+          <td>FindDevice(<font color=#0000ff>String</font> deviceName)</td> 
+          <td>Retorna o endereço do dispositivo com nome "deviceName" se este estiver pareado com o aparelho android. Caso contrário retorna Null</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>BindTextView(<font color=#0000ff>TextView</font> tv)</td> 
+          <td>Para fácil visualização de dados recebidos. Este método só precisa ser invocado uma vez, passando como referência um TextView, este terá seu texto alterado xom a ultia String recebida, a cada vez que forem recebidos novos dados.</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>Write(<font color=#0000ff>String</font> data)</td> 
+          <td>Envia uma String para o dispositivo remoto.</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>CloseConnection()</td> 
+          <td>Encerra a conexão com o dispositivo remoto.</td>
+        </tr>
+       
+          </table>
+        </div>
+    </div>
+
+    <!--ENUMS-->
+    <div id="conteudo_enums">
+        <p> Em Breve </p>
+        <!--
+    <div class="panel panel-default">
+      <div class="panel-heading">Panel heading</div>
+      <table class="table">
+        <tr>
+          <th>Firstname</th>
+          <th>Lastname</th> 
+          <th>Points</th>
+        </tr>
+        <tr>
+          <td>Eve</td>
+          <td>Jackson</td> 
+          <td>94</td>
+        </tr>
+          </table>
+    </div> 
+    -->
+    </div>
+  </div>
+  
+    <!-- Load JS here for greater good =============================-->
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+    
+    <br>
+  </body>
+
+  <footer>
+    <div>
+    <p>
+     Developer: Lucas Cassiano - <a href="http://www.natalnet.br"> <a href="http://www.natalnet.br"> <img src="images/natalnet_logo.png" width="100" /></a> - TEAM lab - UFRN - 2014</p>
+    </div>
+  </footer>
+</html>
