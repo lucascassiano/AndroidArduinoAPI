@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Arduino-Android Bluetooth Connection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Loading Flat UI -->
+    <link href="../css/lucas.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/AA_logo.png">
+  </head>
+
+  <body class="android">
+    <!-- Barra Superior --> 
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <!-- cabeçalho -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+         <span class="sr-only">Toggle navigation</span>
+        </button>
+        <a class="navbar-brand" href="index.html">AA Bridge</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse-01">
+        <!--Home-->
+        <ul class="nav navbar-nav">           
+          <li><a href="index.html">Home</a></li>
+          <li><a href="downloads.html">Downloads</a></li>
+          <li><a href="references.html">References</a></li>
+          <li><a href="#fakelink">About</a></li>
+          <li><a href="../android_tutorial.html">Page in pt-BR</a></li>
+        </ul>    
+
+    </div>
+    </nav>
+    <div class="whiteText">
+      <div align="center">
+          <img src="../images/logo_android.png" width="10%"/>
+          <h2>Getting Started with Arduino Android-Bridge</h2>
+          <font size="12px">
+          <p>Develop Android applications that connect to devices based on Arduino</p>
+          </font>
+      </div>
+    </div>
+    
+    <div class="jumbotron_android">
+
+    <h3>1.Development environment</h3>
+    <p>For application development will be necessary to use a Java IDE, configured for Android development. We recommend using the <a class="interText" href="http://developer.android.com/sdk/index.html"> <b>ADT Bundle</b></a>, this is a version of Eclipse already setup for android development.</p>
+
+    <h3>2.Creating a new project</h3>
+    <p> If you already has a project and want only add the API, go to step 3.<br>
+    With the Eclipse opened, create a new android project: File > New > Android Application Project
+    <br> the following window will show up, configure your project as you prefer.</p>
+    <img src="../images/tutorial_android/image1.png" width="500px"/>
+
+    <h3>3.Adding the API to your project</h3>
+    <p><a class="interText" href="http://developer.android.com/sdk/index.html"><b>Download the Arduino Android Bridge</b></a>, give preference to the latest versions.<br>
+    Extract the file "Android_Arduino_Bridge.zip" and copy the file "Arduino_Android_Bridge.jar" contained in this.<br>
+    Returning to Eclipse, paste the .jar file in the folder "/libs" of your project, like the image below:</p>
+    <img src="../images/tutorial_android/image2.png"/> 
+
+    <h3>4.Adding permissions to AndroidManifest</h3>
+    <p> The <a class="interText" href="http://developer.android.com/guide/topics/manifest/manifest-intro.html"><b>AndroidManifest.xml</b></a> is a file present in the root directory of your project, it contains the essential information about your application, that will be read by Android system.</p>
+    <p>To have us access to the Bluetooth adapter unit is necessary that the application has permission to do so. To add this permission, copy the stretch below to the AndroidManifest.xml of your application:
+    </p>  
+    <p class="code">&lt;uses-permission android:name=<font color=#0000ff>"android.permission.BLUETOOTH_ADMIN"</font>/&gt;<br>
+    &lt;uses-permission android:name=<font color=#0000ff>"android.permission.BLUETOOTH"</font>/&gt;</p>
+    <p> Você pode editar o .xml diretamente, como mostrado abaixo:</p>
+    <img src="../images/tutorial_android/image3.png"/>
+    
+    <h3>5.Importing the API in a Activity</h3>
+    <p> Insert at the beginning of an Activity (or any other .java file that will use the API) the following sentence:</p>
+    <p>import com.teamlab.arduinoandroidapi.Arduino_Bluetooth;</p>
+    <img src="../images/tutorial_android/image4.png"/>
+
+    <h3>6.Starting Arduino_Bluetooth</h3>
+    <p>Initially create a global variable of type Arduino_Bluetooth</p>
+    <p class="code"><font color=#0000ff>Arduino_Bluetooth</font> arduino;</p>
+    
+    <p>In the onCreate () method of your Activity start your variable, this step is important to check if the android phone has bluetooth adapter:</p>
+    <p class="code">arduino = <font color=#0055ff>new</font> <font color=#000000>ArduinoBluetooth()</font>;</p>
+
+    <h3>7.Starting Connection</h3>
+    <p>The API still does not have internal methods for pairing with devices, so it is necessary that the user make the pairing manually.
+    <br>At the moment you want to start a connection, either when the user presses a button or the beginning of an activity, simply the following line:</p>
+    <p class="code">arduino.Begin(<font color=#0000ff>"nome do módulo Bluetooth"</font>);</p>
+    <p>For example, using the JY-MCU module, which has a default name "linvor" would initiate the connection in this way:</p>
+    <p class="code">arduino.Begin(<font color=#0000ff>"linvor"</font>);</p>
+    <p>If the device name is not constant, the API provides methods list of paired devices so that the user can choose which device you want to connect.</p>
+
+    <h3>8.Communication with Arduino</h3>
+    <p>We tried to keep the methods of receiving and sending data similar to a serial communication held by Arduino. Thus, to read the received data and send data just follow the commands below:</p>
+    <p>Receiving:</p>
+    
+    <p class="code"><font color=#ff3322>String</font> leitura = arduino.Read();</p>
+
+    <p>Or, if you want continuous-reading, (using Threads or Runnables) in which reading is updated only when new data is received:</p>
+    <p class="code"><font color=#0022ff>if</font>(arduino.Available()>0){<br>
+     &nbsp; leitura= arduino.Read();<br>
+    }</p>
+    
+    <p>Envio:</p>
+    <p class="code">arduino.Write(<font color=#0000ff>"Hello World"</font>);</p>
+
+    <h3>9.Connection states</h3>
+    <p>With content until the item 8 is now possible to develop applications to connect to arduino, but it is strongly recommended that, whenever possible, test the connection with the arduino device. <br> In the current version of the API (0.2) are the following connection states:</p>
+    <p>
+    <code class="androidCode">ConnectionState.<font color=#0000ff>IMPOSSIBLE_CONNECTION</font></code>-> When the device don't has a bluetooth adapter;<br>
+    <code class="androidCode">ConnectionState.<font color=#0000ff>WAITING_DEVICE</font></code>->The android device has bluetooth and Arduino_Bluetooth object has already been constructed;<br>
+    <code class="androidCode">ConnectionState.<font color=#0000ff>WAITING_DATA</font></code>->A connection has been established but not yet received by data;<br>
+    <code class="androidCode">ConnectionState.<font color=#0000ff>RECEIVING_DATA</font></code>->There is data exchange, it is now safe to conduct the reading / sending data;<br>
+    <code class="androidCode">ConnectionState.<font color=#0000ff>ABORTED</font></code>-> If an internal API error or connection occurs.<br>
+    </p>
+
+    <h3>10.Finishing the connection</h3>
+    <p>At the end of its activity the closing bluetooth socket is required, ie, the onDestroy () method of your activity insert:</p>
+    <p class="code">arduino.CloseConnetion();</p>
+    <p>For more information about the operation of the API access:
+     <a href="references.html"> <button class="btn btn-embossed btn-info">References</button></a></p>
+    <p>Download of basic project (eclipse):
+    <button class="btn btn-embossed btn-primary">Sample.zip</button> (soon)</p>
+    
+  </div>
+  
+    <!-- Load JS here for greater good =============================-->
+    <script src="../js/jquery-1.8.3.min.js"></script>
+    <script src="../js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="../js/jquery.ui.touch-punch.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap-select.js"></script>
+    <script src="../js/bootstrap-switch.js"></script>
+    <script src="../js/flatui-checkbox.js"></script>
+    <script src="../js/flatui-radio.js"></script>
+    <script src="../js/jquery.tagsinput.js"></script>
+    <script src="../js/jquery.placeholder.js"></script>
+    
+    <br>
+  </body>
+
+  <footer>
+    <div>
+    <p>
+     Developer: Lucas Cassiano - <a href="http://www.natalnet.br"> <a href="http://www.natalnet.br"> <img src="../images/natalnet_logo.png" width="100" /></a> - TEAM lab - UFRN - 2014</p>
+    </div>
+  </footer>
+</html>

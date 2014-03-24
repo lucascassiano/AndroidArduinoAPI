@@ -1,29 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
   <head>
     <meta charset="utf-8">
     <title>Arduino-Android Bluetooth Connection</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Loading Bootstrap -->
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
     <!-- Loading Flat UI -->
-    <link href="css/lucas.css" rel="stylesheet">
+    <link href="../css/lucas.css" rel="stylesheet">
 
-    <link rel="shortcut icon" href="images/AA_logo.png">
-
-    <script>
+    <link rel="shortcut icon" href="../images/AA_logo.png">
+  
+      <script>
     
     window.onload = function ()
     {
       var userLang = navigator.language || navigator.userLanguage; 
-      if(userLang!="pt-BR" && userLang!="pt"){
-      //if(userLang=="pt-BR"){
-        document.location.href = 'EN/index.html';
+      //if(userLang!="pt-BR" && userLang!="pt"){
+      if(userLang=="pt-BR"){
+        var r=confirm("We detected your language is pt-BR, do you want to go to our brazilian page?");
+        if (r==true)
+          {
+          document.location.href = '../index.html';
+          }
+        else
+          {
+         
+          }
+        
       }
     }
     </script>
-
 
   </head>
   <body>
@@ -44,7 +52,7 @@
           <li><a href="downloads.html">Downloads</a></li>
           <li><a href="references.html">References</a></li>
           <li><a href="#fakelink">About</a></li>
-          <li><a href="EN/index.html#">en-US</a></li>
+          <li><a href="../index.html">pt-BR Page</a></li>
         </ul>    
 
     </div>
@@ -61,7 +69,7 @@
       </ol>
       <div class="carousel-inner">
         <div class="item active">
-          <img src="images/bridge.png" alt="First slide" width="100%">
+          <img src="../images/bridge.png" alt="First slide" width="100%">
           <div class="container">
             <div class="carousel-caption">
                 <!--<div class="col-sm-1 col-sm-1">
@@ -72,8 +80,7 @@
                 <h1>Android Arduino</h1>
                 <h2> Bridge</h2>
               <font color="#ffffff">
-              <p>Android Arduino Bridge - AABridge - é uma API desenvolvida com a finalidade de tornar fácil e rápida a implementação de conexões via bluetooth entre dispostivos <a class="interText" href="http://developer.android.com"><b>Android</b></a>. Seu diferencial está no fato de possuir métodos que tendem a ser familiares para desenvolvedores <a class="interText" href="http://arduino.cc" color="#ffffff"><b>Arduino</b></a>.</p>
-
+              <p>Android Arduino Bridge - AABridge - is an API developed with the aim of making easy and fast the implementation of Bluetooth connections between <a class="interText" href="http://developer.android.com"><b>Android</b></a> dispostivos and <a class="interText" href="http://arduino.cc" color="#ffffff"><b>Arduino</b></a>. Its differential is in the fact of possess methods which tend to be familiar to developers Arduino.</p>
               <!--<p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>-->
                <!--<p><a href="www.google.com"><button class="btn btn-embossed btn-primary">Download v. 0.2 alpha</button></a></p>-->
                 <a class="btn btn-embossed btn-primary" href="android_tutorial.html" role="button" style="margin:20px; padding-left:20px; padding-right:20px; font-size:22px">Getting started</a><br>  
@@ -84,11 +91,11 @@
 
         <!--ANDROID Slider-->
         <div class="item">
-          <img src="images/slider2.png">
+          <img src="../images/slider2.png">
           <div class="container">
             <div class="carousel-caption">
               <h1>Android - Java API</h1>
-              <p>Disponível para download</p>
+              <p>Alpha version available to download</p>
               <!--<a href="android_tutorial.html"> <button class="btn btn-embossed btn-primary">  </button>-->
               <p> <a class="btn btn-lg btn-embossed btn-info" href="references.html" role="button" >References</a><br>      </p>   
               <a class="btn btn-lg btn-embossed btn-primary" href="downloads.html" role="button">Download Latest Version</a><br> 
@@ -102,11 +109,11 @@
 
         <!-- ARDUINO Slider -->
         <div class="item">
-          <img src="images/slider1.png" width="100%">
+          <img src="../images/slider1.png" width="100%">
           <div class="container">
             <div class="carousel-caption">
               <h1>Setup your Arduino project</h1>
-              <p>Instruções para conexão com módulo bluetooth</p>
+              <p>Instructions to connect to bluetooth module</p>
               
               <a class="btn btn-embossed btn-info" href="arduino_tutorial.html" role="button" style="margin: 20px; font-size:22px;">Simple Guide</a>  
 
@@ -122,23 +129,23 @@
     </div><!-- /.carousel -->
 
     <!-- Load JS here for greater good =============================-->
-    <script src="js/jquery-1.8.3.min.js"></script>
-    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
-    <script src="js/jquery.ui.touch-punch.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-select.js"></script>
-    <script src="js/bootstrap-switch.js"></script>
-    <script src="js/flatui-checkbox.js"></script>
-    <script src="js/flatui-radio.js"></script>
-    <script src="js/jquery.tagsinput.js"></script>
-    <script src="js/jquery.placeholder.js"></script>
+    <script src="../js/jquery-1.8.3.min.js"></script>
+    <script src="../js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="../js/jquery.ui.touch-punch.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap-select.js"></script>
+    <script src="../js/bootstrap-switch.js"></script>
+    <script src="../js/flatui-checkbox.js"></script>
+    <script src="../js/flatui-radio.js"></script>
+    <script src="../js/jquery.tagsinput.js"></script>
+    <script src="../js/jquery.placeholder.js"></script>
     
     <br>
   </body>
 
   <footer>
     <div>
-    <a href="http://www.natalnet.br"> <img src="images/natalnet_logo.png" width="100" /></a>
+    <a href="http://www.natalnet.br"> <img src="../images/natalnet_logo.png" width="100" /></a>
     <p> Developer: Lucas Cassiano - <a href="http://www.natalnet.br"> NatalNet Labs</a> - TEAM lab - UFRN - 2014</p>
     </div>
   </footer>
